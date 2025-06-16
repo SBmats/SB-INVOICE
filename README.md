@@ -3,77 +3,6 @@
   <head>
     <meta charset="UTF-8" />
     <title>SB Billing System</title>
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-        background: #f0f0f0;
-        padding: 20px;
-        display: flex;
-        gap: 20px;
-        flex-wrap: wrap;
-      }
-      .form-section {
-        flex: 1;
-        background: #fff;
-        padding: 20px;
-        border-radius: 8px;
-        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-        min-width: 300px;
-      }
-      .bill-section {
-        width: 57mm;
-        background: #fff;
-        padding: 8px;
-        box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-        border-radius: 5px;
-        display: none;
-        font-size: 12px;
-        line-height: 1.4;
-      }
-      h1,
-      h2 {
-        text-align: center;
-        font-size: 14px;
-        margin: 5px 0;
-      }
-      .form-group {
-        margin-bottom: 10px;
-      }
-      label {
-        display: block;
-        font-size: 14px;
-        margin-bottom: 3px;
-      }
-      input[type="text"],
-      input[type="number"],
-      input[type="file"] {
-        width: 100%;
-        padding: 6px;
-        font-size: 14px;
-        margin-bottom: 5px;
-      }
-      button {
-        padding: 8px;
-        background: #0078d7;
-        color: #fff;
-        border: none;
-        font-size: 14px;
-        cursor: pointer;
-        margin-top: 5px;
-      }
-      button:hover {
-        background: #005a9e;
-      }
-      .bill-content p,
-      .bill-content div {
-        margin: 4px 0;
-      }
-      hr {
-        border: none;
-        border-top: 1px dashed #999;
-        margin: 5px 0;
-      }
-    </style>
   </head>
   <body>
     <div class="form-section">
@@ -107,11 +36,12 @@
     </div>
 
     <div class="bill-section" id="bill">
-      <h1>K VENKATESWARA RAO</h1>
-      <h1>+91 9346304276,+91 9441982385</h1>
-      <h1>Pallakollu Read Narasapuram</h1>
+      <h2>SBmats.com</h2>
+      <h4>K VENKATESWARA RAO</h4>
+      <h4>+91 9346304276,+91 9441982385</h4>
+      <h4>Pallakollu Read Narasapuram</h4>
 
-      <h2>Invoice for SBmats.com</h2>
+      
       <hr />
       <div class="bill-content">
         <p id="billName"></p>
@@ -124,66 +54,5 @@
       </div>
     </div>
 
-    <script>
-      let items = [];
-
-      function addItem() {
-        let height = parseFloat(document.getElementById("height").value);
-        let width = parseFloat(document.getElementById("width").value);
-        let pricePerFit = parseFloat(
-          document.getElementById("pricePerFit").value
-        );
-
-        if (isNaN(height) || isNaN(width) || isNaN(pricePerFit)) {
-          alert("Please fill all product fields");
-          return;
-        }
-
-        let totalFits = height * width;
-        let totalAmount = totalFits * pricePerFit;
-
-        items.push({ height, width, totalFits, pricePerFit, totalAmount });
-        alert("Item added!");
-
-        // Clear fields
-        document.getElementById("height").value = "";
-        document.getElementById("width").value = "";
-        document.getElementById("pricePerFit").value = "";
-      }
-
-      function generateBill() {
-        let name = document.getElementById("customerName").value;
-        let mobile = document.getElementById("customerMobile").value;
-
-        if (!name || !mobile || items.length === 0) {
-          alert("Fill customer details and add at least one item.");
-          return;
-        }
-
-        document.getElementById("billName").innerText = "Name: " + name;
-        document.getElementById("billMobile").innerText = "Mobile: " + mobile;
-
-        let itemListHTML = "";
-        let grandTotal = 0;
-        items.forEach((item, index) => {
-          itemListHTML += `
-      <div>
-        <strong>Item ${index + 1}</strong><br>
-        H: ${item.height} fits, W: ${item.width} fits<br>
-        Total Fits: ${item.totalFits}<br>
-        Price/Fit: ₹${item.pricePerFit}<br>
-        Amount: ₹${item.totalAmount.toFixed(2)}<br>
-        <hr>
-      </div>
-    `;
-          grandTotal += item.totalAmount;
-        });
-
-        document.getElementById("itemsList").innerHTML = itemListHTML;
-        document.getElementById("grandTotal").innerHTML =
-          "<strong>Grand Total: ₹" + grandTotal.toFixed(2) + "</strong>";
-        document.getElementById("bill").style.display = "block";
-      }
-    </script>
   </body>
 </html>
